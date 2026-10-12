@@ -1,438 +1,425 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html lang="ky">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>СРС генератор</title>
-<meta name="description" content="СРС түзүүгө мүмкүн болгон сайт: тема жазасыз, программа текстти, формуланы, таблицаны, графикти түзөт жана сиздин кол жазмаңыз менен чыгарат. Ходжебеков Орозбий.">
+<meta name="description" content="СРС генератор — тема жазасыз, программа текстти, формуланы, таблицаны жана графикти түзүп, баарын сиздин кол жазмаңыз менен чыгарат. Ходжебеков Орозбий.">
+<meta name="keywords" content="СРС, студенттин өз алдынча иши, СРС генератор, Ходжебеков Орозбий, КУУ">
+<meta property="og:title" content="СРС генератор">
+<meta property="og:description" content="Тема жазасыз — СРС кол жазма менен даяр болот.">
+<meta name="robots" content="index,follow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;700&family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@500;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800;900&family=Golos+Text:wght@400;500;600;700;800&family=Caveat:wght@500;600&display=swap">
 <style>
-/* Layout: "сия тамчысы" — бир колонна телефон үчүн; тамчы түрүндөгү айнек беттер, ак кагаз барактары, тетрадь сызыгы */
+/* Layout: ромб торчо фон + параллакс катмарлар, тийме-карталуу scroll-timeline, гамбургер меню, туруктуу ылдыйкы CTA тилкеси */
 :root{
-  --bg:#E8F0F6;
-  --bg-2:#D6E5F0;
-  --fg:#0F2740;
-  --muted:#4F6982;
-  --ink:#1D3270;          /* кагаздагы сия */
-  --drop:#1677B8;         /* тамчы, негизги түс */
-  --drop-2:#39B6D3;
-  --paper:#FCFDFE;
-  --paper-line:#D7E4EF;
-  --glass:rgba(255,255,255,.58);
-  --glass-edge:rgba(255,255,255,.9);
-  --glass-shade:rgba(15,39,64,.10);
-  --hair:rgba(15,39,64,.12);
-  --ok:#1C8A5A;
-  --font-display:"Golos Text",system-ui,sans-serif;
-  --font-logo:"Unbounded","Golos Text",system-ui,sans-serif;
+  --rose:#F43F5E; --coral:#FB923C; --rose-dark:#BE123C; --coral-dark:#C2410C;
+  --bg:#FFF1F2; --bg-2:#FFE4E6; --ink:#1F0A12; --fg:#2B0F18; --muted:#7A4552;
+  --paper:#FFFFFF; --line:rgba(190,18,60,.14); --glass:rgba(255,255,255,.62); --glass-edge:rgba(255,255,255,.85);
+  --ok:#0F9D63;
+  --font-display:"Unbounded","Golos Text",system-ui,sans-serif;
   --font-body:"Golos Text",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-  --font-hand:"Caveat","Segoe Print","Comic Sans MS",cursive;
-  --r-lg:28px;
-  --r-md:18px;
-  --gutter:clamp(16px,5vw,40px);
+  --font-hand:"Caveat","Segoe Print",cursive;
+  --gutter:clamp(18px,5vw,44px);
+  --r-lg:28px; --r-md:18px;
   color-scheme:light;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#071321; --bg-2:#0C2034; --fg:#E3EEF7; --muted:#93AFC6;
-    --drop:#4BB4F0; --drop-2:#5FE0F0;
-    --glass:rgba(120,180,230,.08); --glass-edge:rgba(170,215,255,.22); --glass-shade:rgba(0,0,0,.45);
-    --hair:rgba(200,225,250,.14); --ok:#4FD39A;
+    --bg:#1A0710; --bg-2:#230A15; --ink:#FFE9EC; --fg:#FDEFF1; --muted:#D9A7B2;
+    --paper:#2A0E19; --line:rgba(251,146,60,.22); --glass:rgba(42,14,25,.6); --glass-edge:rgba(251,146,60,.2);
     color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
-  --bg:#071321; --bg-2:#0C2034; --fg:#E3EEF7; --muted:#93AFC6;
-  --drop:#4BB4F0; --drop-2:#5FE0F0;
-  --glass:rgba(120,180,230,.08); --glass-edge:rgba(170,215,255,.22); --glass-shade:rgba(0,0,0,.45);
-  --hair:rgba(200,225,250,.14); --ok:#4FD39A;
+  --bg:#1A0710; --bg-2:#230A15; --ink:#FFE9EC; --fg:#FDEFF1; --muted:#D9A7B2;
+  --paper:#2A0E19; --line:rgba(251,146,60,.22); --glass:rgba(42,14,25,.6); --glass-edge:rgba(251,146,60,.2);
   color-scheme:dark;
 }
-
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-body{
-  margin:0;background:var(--bg);color:var(--fg);
-  font-family:var(--font-body);font-size:16px;line-height:1.6;
-  overflow-x:hidden;
-}
-img{max-width:100%;height:auto;display:block}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:16px;line-height:1.6;overflow-x:hidden}
+img,video{max-width:100%;display:block}
 a{color:inherit}
-:focus-visible{outline:3px solid var(--drop-2);outline-offset:3px;border-radius:8px}
-h1,h2,h3{text-wrap:balance;margin:0}
+:focus-visible{outline:3px solid var(--coral);outline-offset:3px;border-radius:8px}
+h1,h2,h3{text-wrap:balance;margin:0;font-family:var(--font-display)}
 p{margin:0}
+.wrap{width:100%;max-width:1120px;margin:0 auto;padding-inline:var(--gutter)}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  background:linear-gradient(90deg,var(--rose),var(--coral));-webkit-background-clip:text;background-clip:text;color:transparent}
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} *{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important} }
 
-.sky{position:fixed;inset:0;z-index:-1;pointer-events:none;
-  background:radial-gradient(120% 60% at 85% -10%,var(--bg-2),transparent 60%),var(--bg)}
+/* ---------- Canvas фон: жылжыган градиент бөлүкчөлөр (hero) ---------- */
+#particles{position:absolute;inset:0;width:100%;height:100%;display:block}
 
-.wrap{width:100%;max-width:1080px;margin:0 auto;padding-inline:var(--gutter)}
+/* ---------- Нав ---------- */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:60;
+  background:color-mix(in srgb,var(--bg) 70%,transparent);backdrop-filter:blur(14px) saturate(1.4);-webkit-backdrop-filter:blur(14px) saturate(1.4);
+  border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;padding-block:12px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--font-display);font-weight:800;font-size:16px;color:var(--fg)}
+.brand .mark{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--rose),var(--coral));
+  display:grid;place-items:center;color:#fff;font-weight:800;font-size:14px;box-shadow:0 6px 16px -6px var(--rose)}
+.burger{width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--paper);display:grid;place-items:center;gap:4px;cursor:pointer}
+.burger span{width:18px;height:2px;background:var(--fg);border-radius:2px;transition:transform .3s,opacity .3s}
+.burger[aria-expanded="true"] span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.menu{position:fixed;inset:0;z-index:70;background:color-mix(in srgb,var(--ink) 55%,transparent);backdrop-filter:blur(2px);
+  opacity:0;pointer-events:none;transition:opacity .3s}
+.menu.open{opacity:1;pointer-events:auto}
+.menu-panel{position:absolute;right:0;top:0;bottom:0;width:min(86vw,380px);background:var(--paper);
+  padding:calc(18px + env(safe-area-inset-top,0px)) 26px 26px;display:flex;flex-direction:column;gap:6px;
+  transform:translateX(100%);transition:transform .35s cubic-bezier(.2,.8,.2,1);box-shadow:-20px 0 60px -20px rgba(0,0,0,.35)}
+.menu.open .menu-panel{transform:none}
+.menu-close{align-self:flex-end;width:40px;height:40px;border-radius:10px;border:1px solid var(--line);background:transparent;cursor:pointer;
+  font-size:18px;color:var(--fg);margin-bottom:10px}
+.menu a{display:block;padding:14px 6px;font:600 19px/1 var(--font-display);color:var(--fg);text-decoration:none;border-bottom:1px solid var(--line)}
+.menu a small{display:block;font:400 12px/1 var(--font-body);color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:5px}
+.menu .mcta{margin-top:18px;text-align:center;border-radius:999px;background:linear-gradient(135deg,var(--rose),var(--coral));color:#fff;border:0}
 
-/* жогорку тилке */
-.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;
-  backdrop-filter:blur(14px) saturate(1.4);-webkit-backdrop-filter:blur(14px) saturate(1.4);
-  background:color-mix(in srgb,var(--bg) 72%,transparent);border-bottom:1px solid var(--hair)}
-.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:10px}
-.brand{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:700;font-size:15px;letter-spacing:.01em;text-decoration:none}
-.brand .dot{width:22px;height:24px}
-.top .cta-mini{font-weight:600;font-size:14px;text-decoration:none;padding:8px 14px;border-radius:999px;
-  background:var(--fg);color:var(--bg)}
+/* ---------- Баскычтар ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:700 15px/1 var(--font-body);text-decoration:none;
+  padding:15px 22px;border-radius:999px;border:0;cursor:pointer;white-space:nowrap}
+.btn-grad{color:#fff;background:linear-gradient(135deg,var(--rose),var(--coral));box-shadow:0 14px 28px -12px var(--rose)}
+.btn-grad:hover{filter:brightness(1.06)}
+.btn-ghost{color:var(--fg);background:var(--paper);border:1px solid var(--line)}
+.btn-wa{color:#fff;background:#1FA855}
+.btn-tg{color:#fff;background:#26A5E4}
 
-/* тамчы-айнек */
-.glass{background:var(--glass);border:1px solid var(--glass-edge);
-  backdrop-filter:blur(18px) saturate(1.5);-webkit-backdrop-filter:blur(18px) saturate(1.5);
-  box-shadow:0 1px 0 var(--glass-edge) inset,0 18px 40px -18px var(--glass-shade)}
+/* ---------- HERO ---------- */
+.hero{position:relative;overflow:hidden;padding-block:calc(36px + env(safe-area-inset-top,0px)) 54px}
+.hero-bg{position:absolute;left:0;right:0;top:-20%;height:150%;z-index:0;pointer-events:none}
+.hero-bg::before{content:"";position:absolute;inset:0;background:
+    radial-gradient(44% 38% at 18% 8%, color-mix(in srgb,var(--rose) 55%,transparent), transparent 70%),
+    radial-gradient(40% 44% at 92% 18%, color-mix(in srgb,var(--coral) 55%,transparent), transparent 70%),
+    linear-gradient(180deg,var(--bg),var(--bg-2));
+  filter:blur(2px)}
+.hero .wrap{position:relative;z-index:2}
+.hero-grid{display:grid;gap:36px;align-items:center}
+.hero h1{font-weight:900;line-height:0.98;letter-spacing:-.025em;font-size:clamp(42px,11vw,86px)}
+.hero h1 .g{background:linear-gradient(120deg,var(--rose),var(--coral));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .lead{margin-top:18px;color:var(--muted);font-size:17px;max-width:42ch}
+.hero .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.stat-row{display:flex;gap:28px;margin-top:34px;flex-wrap:wrap}
+.stat b{display:block;font-family:var(--font-display);font-weight:800;font-size:clamp(24px,5vw,34px);
+  background:linear-gradient(120deg,var(--rose),var(--coral));-webkit-background-clip:text;background-clip:text;color:transparent;
+  font-variant-numeric:tabular-nums}
+.stat span{display:block;font-size:12.5px;color:var(--muted);font-weight:600;letter-spacing:.02em;margin-top:2px}
 
-/* HERO */
-.hero{padding-block:clamp(20px,6vw,64px) 8px}
-.hero-grid{display:grid;gap:28px;align-items:center}
-.eyebrow{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--drop)}
-.hero h1{font-family:var(--font-display);font-weight:800;line-height:1.02;margin-top:12px;
-  font-size:clamp(44px,13vw,96px);letter-spacing:-.02em}
-.hero h1 .sub{display:block;font-weight:500;font-size:clamp(20px,5.4vw,38px);line-height:1.2;letter-spacing:-.005em;margin-top:10px}
-.hero h1 .srs{font-family:var(--font-logo);background:linear-gradient(160deg,var(--drop-2),var(--drop) 55%,var(--ink));
-  -webkit-background-clip:text;background-clip:text;color:transparent}
-.hero .lead{margin-top:18px;color:var(--muted);font-size:17px;max-width:34ch}
-.hero .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
-.btn{display:inline-flex;align-items:center;gap:8px;font:600 15px/1 var(--font-body);text-decoration:none;
-  padding:15px 20px;border-radius:999px;border:0;cursor:pointer}
-.btn-drop{color:#fff;background:radial-gradient(120% 140% at 30% 0%,var(--drop-2),var(--drop) 60%);
-  box-shadow:0 10px 24px -10px var(--drop),inset 0 1px 0 rgba(255,255,255,.5)}
-.btn-ghost{color:var(--fg)}
-.btn-wa{color:#05341A;background:#25D366;box-shadow:0 10px 24px -12px #25D366}
-.btn-tg{color:#fff;background:#2AABEE;box-shadow:0 10px 24px -12px #2AABEE}
-.btn svg{width:20px;height:20px;flex:none}
-.hero-video{position:relative;justify-self:center;width:min(100%,420px);border-radius:28px;overflow:hidden;
-  aspect-ratio:3/4;background:#0A1830;box-shadow:0 30px 60px -24px rgba(10,24,48,.55),0 0 0 1px var(--hair)}
-.hero-video video,.hero-video img{width:100%;height:100%;object-fit:cover;display:block}
-.hero-video .live{position:absolute;left:14px;bottom:14px;font:600 12px/1 var(--font-body);letter-spacing:.06em;color:#fff;
-  padding:7px 10px;border-radius:999px;background:rgba(10,24,48,.55);backdrop-filter:blur(6px)}
-.special{margin-top:18px;padding:14px 16px;border-radius:var(--r-md);font-weight:600;line-height:1.45;max-width:40ch}
-.special em{font-style:normal;color:var(--drop)}
+.hero-video{position:relative;border-radius:30px;overflow:hidden;aspect-ratio:3/4;background:#0A1830;
+  box-shadow:0 40px 80px -30px color-mix(in srgb,var(--rose) 60%,transparent),0 0 0 1px var(--glass-edge)}
+.hero-video video{width:100%;height:100%;object-fit:cover}
+.hero-video .tag{position:absolute;left:14px;top:14px;font:700 12px/1 var(--font-body);letter-spacing:.04em;color:#fff;
+  padding:8px 12px;border-radius:999px;background:rgba(10,10,20,.5);backdrop-filter:blur(6px)}
+.hero-video .sound{position:absolute;right:12px;bottom:12px;display:inline-flex;align-items:center;gap:7px;cursor:pointer;
+  font:700 13px/1 var(--font-body);color:#17040A;background:#fff;border:0;border-radius:999px;padding:11px 14px 11px 11px;
+  box-shadow:0 8px 20px -8px rgba(0,0,0,.5);animation:pulse 2.2s ease-in-out infinite}
+.hero-video .sound svg{width:19px;height:19px}
+.hero-video .sound[aria-pressed="true"]{animation:none}
+@keyframes pulse{50%{box-shadow:0 0 0 8px rgba(255,255,255,.22),0 8px 20px -8px rgba(0,0,0,.5)}}
 
-/* SCROLL STORY */
-.story{position:relative;margin-top:28px}
-.story-head{padding-block:0 18px}
-.story-head h2,.sec h2{font-family:var(--font-display);font-weight:800;font-size:clamp(24px,6.4vw,40px);line-height:1.12;letter-spacing:-.01em}
-.story-head p,.sec .intro{color:var(--muted);margin-top:10px;max-width:52ch}
-.stage{display:grid;gap:18px}
-.step{display:grid;gap:14px}
-.cap{display:grid;gap:6px}
-.cap .n{font:700 13px/1 var(--font-display);color:var(--drop);letter-spacing:.06em}
-.cap h3{font-family:var(--font-display);font-weight:700;font-size:21px;line-height:1.2}
-.cap p{color:var(--muted);font-size:15px}
-.vis{border-radius:var(--r-lg);padding:16px;min-height:300px;position:relative;overflow:hidden}
-.rail{display:none}
+/* ---------- parallax орнаткыч ---------- */
+.plx{position:relative}
+.plx-layer{will-change:transform}
 
-/* 1-кадам: форма */
-.form{display:grid;gap:10px}
-.field{display:grid;gap:4px;padding:12px 14px;border-radius:14px;background:var(--paper);color:#1A2B3C;border:1px solid var(--paper-line)}
-.field span{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#6A8299}
-.field b{font-weight:600;font-size:17px;min-height:1.5em;display:block}
-.field b.typing::after{content:"";display:inline-block;width:2px;height:1.05em;margin-left:2px;vertical-align:-2px;background:var(--drop);animation:blink 1s steps(1) infinite}
-@keyframes blink{50%{opacity:0}}
-.form .go{justify-self:start;margin-top:4px;transition:transform .25s,box-shadow .25s}
-.form .go.pressed{transform:scale(.96);box-shadow:0 0 0 8px color-mix(in srgb,var(--drop-2) 30%,transparent)}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{font-size:12px;font-weight:600;padding:6px 10px;border-radius:999px;background:var(--paper);color:#29435C;border:1px solid var(--paper-line)}
+/* ---------- бренд рейлин (логос тилкеси) ---------- */
+.rail{padding-block:26px;border-block:1px solid var(--line);overflow:hidden;background:var(--paper)}
+.rail-track{display:flex;gap:46px;width:max-content;animation:scroll-x 26s linear infinite}
+.rail-track span{font:700 14px/1 var(--font-display);color:var(--muted);white-space:nowrap;letter-spacing:.02em}
+@keyframes scroll-x{to{transform:translateX(-50%)}}
 
-/* 2-кадам: басма текст */
-.sheet{background:var(--paper);color:#1B2633;border-radius:12px;padding:18px 18px 22px;
-  box-shadow:0 12px 30px -16px rgba(15,39,64,.45);position:relative;aspect-ratio:210/240;overflow:hidden}
-.sheet h4{margin:0 0 8px;font:700 14px/1.2 var(--font-body);text-decoration:underline}
-.sheet .txt{font-size:12px;line-height:1.75;margin:0}
-.sheet .ln{opacity:calc(.08 + var(--w,1)*.92);transition:opacity .2s}
-.sheet .formula{display:block;text-align:center;font-style:italic;font-size:13px;margin:6px 0}
-.badges{position:absolute;right:10px;bottom:10px;display:grid;gap:6px;justify-items:end}
-.badge{font-size:11px;font-weight:700;padding:5px 9px;border-radius:999px;background:#E7F6EE;color:#17714A;
-  opacity:var(--o,1);transform:translateY(calc((1 - var(--o,1))*8px));transition:opacity .3s,transform .3s}
-.meter{height:6px;border-radius:9px;background:var(--hair);overflow:hidden;margin-top:12px}
-.meter i{display:block;height:100%;width:calc(var(--t,1)*100%);background:linear-gradient(90deg,var(--drop-2),var(--drop))}
-.meter-l{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:6px;font-variant-numeric:tabular-nums}
+/* ---------- SECTION base ---------- */
+.sec{padding-block:clamp(56px,10vw,108px)}
+.sec h2{font-weight:800;font-size:clamp(28px,6vw,44px);line-height:1.08;letter-spacing:-.015em}
+.sec .intro{color:var(--muted);margin-top:12px;max-width:56ch;font-size:16.5px}
+.head-row{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px}
 
-/* 3-кадам: кол жазма */
-.sheet.hand{aspect-ratio:auto;padding:0}
-.hand-wrap{position:relative}
-.hand-wrap{height:min(52svh,420px);overflow:hidden}
-.hand-wrap img{width:100%;height:100%;object-fit:cover;object-position:50% 6%;border-radius:12px;clip-path:inset(0 0 calc((1 - var(--t,1))*100%) 0)}
-.pen{position:absolute;left:0;top:calc(var(--t,1)*100%);width:34px;height:34px;margin:-30px 0 0 -6px;
-  transform:translateX(calc(var(--px,0.8)*min(78vw,440px)));opacity:calc(1 - var(--done,1));transition:opacity .3s}
-.ghost{position:absolute;inset:14px;background:repeating-linear-gradient(#fff0 0 26px,#E2E9F1 26px 34px);
-  opacity:calc((1 - var(--t,1))*.8);border-radius:6px;pointer-events:none}
+/* ---------- STORY / timeline (scroll-based) ---------- */
+.story{position:relative}
+.story-line{position:absolute;left:21px;top:6px;bottom:6px;width:3px;border-radius:3px;
+  background:linear-gradient(180deg,var(--line),var(--line));overflow:hidden}
+.story-line i{display:block;width:100%;background:linear-gradient(180deg,var(--rose),var(--coral));height:var(--p,0%);transition:height .1s linear}
+.story-steps{display:grid;gap:40px;margin-top:30px}
+.step{position:relative;padding-left:62px;opacity:.38;transform:translateY(6px);transition:opacity .4s,transform .4s}
+.step.active{opacity:1;transform:none}
+.step .dot{position:absolute;left:8px;top:2px;width:28px;height:28px;border-radius:50%;background:var(--paper);border:3px solid var(--line);
+  display:grid;place-items:center;font:800 12px/1 var(--font-display);color:var(--muted);transition:background .3s,border-color .3s,color .3s}
+.step.active .dot{background:linear-gradient(135deg,var(--rose),var(--coral));border-color:transparent;color:#fff}
+.step h3{font-size:21px;font-weight:700}
+.step p{color:var(--muted);margin-top:6px;font-size:15px;max-width:50ch}
+.step .ph{margin-top:16px;border-radius:18px;overflow:hidden;background:var(--paper);border:1px solid var(--line);padding:10px}
+.step .ph img{border-radius:8px}
 
-/* жандуу режим (JS, кыймылга уруксат бар) */
-.story.is-live{height:340vh;height:340svh}
-.story.is-live .sticky{position:sticky;top:calc(env(safe-area-inset-top,0px) + 56px);
-  height:calc(100vh - 56px);height:calc(100svh - 56px - env(safe-area-inset-top,0px));display:flex;flex-direction:column;justify-content:center;padding-block:8px}
-.story.is-live .story-head{padding-bottom:12px}
-.story.is-live .stage{position:relative;flex:0 1 auto}
-.story.is-live .step{position:absolute;inset:0 0 auto 0;opacity:0;transform:translateY(16px);transition:opacity .45s,transform .45s;pointer-events:none}
-.story.is-live .step.on{position:relative;opacity:1;transform:none;pointer-events:auto}
-.story.is-live .rail{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
-.rail div{display:grid;gap:6px;font-size:12px;font-weight:600;color:var(--muted)}
-.rail div.on{color:var(--fg)}
-.rail div i{height:4px;border-radius:4px;background:var(--hair);overflow:hidden;position:relative}
-.rail div i::after{content:"";position:absolute;inset:0;width:calc(var(--f,0)*100%);background:var(--drop)}
-.story.is-live .sheet{aspect-ratio:auto;height:min(46svh,360px)}
-.story.is-live .sheet.hand{height:auto}
-.story.is-live .vis{min-height:0}
-.story.is-live .story-head p{display:none}
-@media (max-height:700px){.story.is-live .cap p{display:none}}
-
-/* СЕКЦИЯЛАР */
-.sec{padding-block:clamp(48px,10vw,96px) 0}
-.types{display:grid;gap:14px;margin-top:22px}
-.type{border-radius:var(--r-lg);padding:14px;display:grid;gap:12px;min-width:0}
-.type .ph{background:var(--paper);border-radius:12px;padding:10px;overflow:hidden;display:grid;gap:8px}
-.type .ph img{border-radius:4px}
-.type h3{font-family:var(--font-display);font-weight:700;font-size:17px;line-height:1.25}
+/* ---------- Мисалдар картасы ---------- */
+.types{display:grid;gap:16px;margin-top:26px}
+.type{border-radius:var(--r-lg);padding:16px;background:var(--paper);border:1px solid var(--line);display:grid;gap:12px;
+  transition:transform .3s,box-shadow .3s}
+.type:hover{transform:translateY(-4px);box-shadow:0 22px 40px -22px color-mix(in srgb,var(--rose) 50%,transparent)}
+.type .ph{border-radius:12px;overflow:hidden;background:var(--bg-2);padding:8px}
+.type .tag{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  background:linear-gradient(90deg,var(--rose),var(--coral));-webkit-background-clip:text;background-clip:text;color:transparent}
+.type h3{font-size:17px;font-weight:700;margin-top:2px}
 .type p{color:var(--muted);font-size:14.5px}
-.type .tag{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--drop)}
 
-.pages{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 18px;margin-top:20px;
-  -webkit-overflow-scrolling:touch;scrollbar-width:thin}
-.pages button{flex:0 0 auto;width:min(58vw,240px);scroll-snap-align:start;padding:0;border:0;background:none;cursor:zoom-in;text-align:left;color:inherit;font:inherit}
-.pages img{aspect-ratio:210/297;width:100%;object-fit:cover;object-position:top;border-radius:6px;background:#fff;
-  box-shadow:0 14px 30px -16px rgba(15,39,64,.55),0 0 0 1px var(--hair)}
-.pages span{display:block;font-size:13px;color:var(--muted);margin-top:8px}
-.meta-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-
-/* почерк */
-.hand-demo{margin-top:22px;border-radius:var(--r-lg);padding:14px;display:grid;gap:14px}
+/* ---------- кол жазма демо ---------- */
+.hand-demo{margin-top:26px;border-radius:var(--r-lg);padding:20px;background:var(--paper);border:1px solid var(--line);
+  display:grid;gap:18px}
 .styles{display:flex;gap:8px;flex-wrap:wrap}
-.styles button{font:600 14px/1 var(--font-body);padding:11px 14px;border-radius:999px;border:1px solid var(--hair);background:transparent;color:var(--fg);cursor:pointer}
-.styles button[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
-.notebook{background:var(--paper);border-radius:12px;padding:20px 18px 22px 46px;position:relative;min-height:220px;
-  background-image:linear-gradient(90deg,transparent 34px,#F2A7A7 34px 35.5px,transparent 35.5px),
-    repeating-linear-gradient(transparent 0 37px,var(--paper-line) 37px 38px);
-  background-position:0 0,0 14px}
-.notebook .who{font:600 11px/1 var(--font-body);letter-spacing:.08em;text-transform:uppercase;color:#7A8FA4;margin-bottom:6px}
-.script{font-family:var(--font-hand);font-size:27px;line-height:38px;color:var(--ink);word-break:break-word}
-.script span{display:inline-block;transition:transform .35s ease,color .35s}
-.howto{display:grid;gap:12px;margin-top:6px;counter-reset:s}
-.howto li{list-style:none;display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start}
-.howto li::before{counter-increment:s;content:counter(s);width:34px;height:38px;display:grid;place-items:center;
-  font:800 15px/1 var(--font-display);color:#fff;border-radius:50%;height:34px;
-  background:radial-gradient(circle at 35% 30%,var(--drop-2),var(--drop))}
-.howto{padding:0;margin:18px 0 0}
-.real{margin-top:14px;display:grid;gap:8px}
-.real .ph{background:var(--paper);border-radius:12px;padding:10px}
-.real small{color:var(--muted);font-size:13px}
+.styles button{font:700 14px/1 var(--font-body);padding:11px 15px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--fg);cursor:pointer}
+.styles button[aria-pressed="true"]{background:linear-gradient(135deg,var(--rose),var(--coral));color:#fff;border-color:transparent}
+.notebook{background:var(--bg);border-radius:14px;padding:20px 18px 22px 44px;position:relative;min-height:200px;
+  background-image:linear-gradient(90deg,transparent 32px,color-mix(in srgb,var(--rose) 45%,transparent) 32px 33.5px,transparent 33.5px),
+    repeating-linear-gradient(transparent 0 37px,var(--line) 37px 38px)}
+.notebook .who{font:700 11px/1 var(--font-body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.script{font-family:var(--font-hand);font-size:27px;line-height:38px;color:var(--ink)}
+.script span{display:inline-block;transition:transform .35s}
+.howto{display:grid;gap:12px;list-style:none;padding:0;margin:0;counter-reset:s}
+.howto li{display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start}
+.howto li::before{counter-increment:s;content:counter(s);width:34px;height:34px;display:grid;place-items:center;
+  font:800 14px/1 var(--font-display);color:#fff;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--coral))}
+.howto b{display:block;font-weight:700}
+.howto p{color:var(--muted);font-size:14.5px}
 
-/* мүмкүнчүлүктөр */
-.feat{display:grid;gap:10px;margin-top:22px;padding:0}
-.feat li{list-style:none;display:grid;grid-template-columns:auto 1fr;gap:12px;padding:14px 0;border-top:1px solid var(--hair)}
-.feat li:last-child{border-bottom:1px solid var(--hair)}
-.feat b{display:block;font-weight:600}
-.feat p{color:var(--muted);font-size:14.5px}
-.feat svg{width:24px;height:24px;color:var(--drop);margin-top:2px}
+/* ---------- Статистика ---------- */
+.stats-sec{background:linear-gradient(135deg,var(--rose-dark),var(--rose) 45%,var(--coral));color:#fff;position:relative;overflow:hidden}
+.stats-sec::before{content:"";position:absolute;inset:0;
+  background-image:radial-gradient(1px 1px at 10% 20%,rgba(255,255,255,.5) 1px,transparent 0),
+    radial-gradient(1px 1px at 80% 60%,rgba(255,255,255,.4) 1px,transparent 0),
+    radial-gradient(1px 1px at 40% 80%,rgba(255,255,255,.35) 1px,transparent 0);
+  background-size:220px 220px}
+.stats-sec .wrap{position:relative}
+.stats-sec h2{color:#fff}
+.stats-sec .intro{color:rgba(255,255,255,.82)}
+.stat-grid{display:grid;gap:18px;margin-top:34px;grid-template-columns:repeat(2,1fr)}
+.sb{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:22px 18px;backdrop-filter:blur(4px)}
+.sb b{display:block;font-family:var(--font-display);font-weight:800;font-size:clamp(28px,6vw,42px);font-variant-numeric:tabular-nums}
+.sb span{display:block;font-size:13px;opacity:.88;margin-top:4px;font-weight:500}
 
-/* автор / сатуу */
-.author{margin-top:22px;border-radius:32px;padding:24px 20px;display:grid;gap:16px;position:relative;overflow:hidden}
-.author::before{content:"";position:absolute;width:280px;height:280px;right:-90px;top:-110px;opacity:.5;
-  border-radius:50%;background:radial-gradient(circle at 35% 35%,var(--drop-2),transparent 65%)}
-.author .name{font-family:var(--font-display);font-weight:800;font-size:clamp(26px,7vw,44px);line-height:1.05;letter-spacing:-.01em;position:relative}
-.author .sig{font-family:var(--font-hand);font-size:30px;color:var(--drop);line-height:1;transform:rotate(-3deg);transform-origin:left}
+/* ---------- Баа таблицасы ---------- */
+.pricing{display:grid;gap:18px;margin-top:30px}
+.plan{border-radius:var(--r-lg);padding:26px 22px;background:var(--paper);border:1px solid var(--line);position:relative;display:grid;gap:16px}
+.plan.feat{border-color:transparent;background:linear-gradient(var(--paper),var(--paper)) padding-box,
+    linear-gradient(135deg,var(--rose),var(--coral)) border-box;border-width:2px;border-style:solid}
+.plan .pill{position:absolute;top:-13px;right:20px;font:800 11px/1 var(--font-display);letter-spacing:.04em;text-transform:uppercase;
+  color:#fff;background:linear-gradient(135deg,var(--rose),var(--coral));padding:8px 13px;border-radius:999px}
+.plan h3{font-size:19px;font-weight:700}
+.plan .price{font-family:var(--font-display);font-weight:800;font-size:clamp(28px,5vw,36px)}
+.plan .price small{font-family:var(--font-body);font-weight:600;font-size:14px;color:var(--muted)}
+.plan ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.plan li{display:grid;grid-template-columns:20px 1fr;gap:10px;font-size:14.5px;color:var(--fg)}
+.plan li svg{width:20px;height:20px;color:var(--ok);flex:none}
+
+/* ---------- FAQ ---------- */
+.faq{margin-top:26px;display:grid;gap:12px}
+.qa{border-radius:16px;border:1px solid var(--line);background:var(--paper);overflow:hidden}
+.qa summary{list-style:none;cursor:pointer;padding:18px 20px;display:flex;justify-content:space-between;gap:14px;align-items:center;
+  font-weight:700;font-size:15.5px}
+.qa summary::-webkit-details-marker{display:none}
+.qa .plus{width:26px;height:26px;border-radius:50%;background:var(--bg-2);display:grid;place-items:center;flex:none;position:relative}
+.qa .plus::before,.qa .plus::after{content:"";position:absolute;background:var(--rose-dark);border-radius:2px}
+.qa .plus::before{width:12px;height:2px}
+.qa .plus::after{width:2px;height:12px;transition:transform .25s}
+.qa[open] .plus::after{transform:rotate(90deg)}
+.qa .a{padding:0 20px 18px;color:var(--muted);font-size:14.5px;max-width:64ch}
+
+/* ---------- Байланыш форма ---------- */
+.contact-grid{display:grid;gap:28px;margin-top:30px}
+.form{display:grid;gap:14px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);padding:22px}
+.f-row{display:grid;gap:6px}
+.f-row label{font-size:12.5px;font-weight:700;letter-spacing:.03em;color:var(--muted)}
+.f-row input,.f-row textarea{font:500 15px/1.4 var(--font-body);padding:13px 14px;border-radius:12px;border:1.5px solid var(--line);
+  background:var(--bg);color:var(--fg);resize:vertical}
+.f-row input:focus,.f-row textarea:focus{border-color:var(--rose);outline:none}
+.f-row .err{font-size:12.5px;color:var(--rose-dark);min-height:1em}
+.f-row.invalid input,.f-row.invalid textarea{border-color:var(--rose-dark)}
+.form .submit{margin-top:4px}
+.form .ok{display:none;border-radius:12px;padding:14px 16px;background:color-mix(in srgb,var(--ok) 15%,transparent);color:var(--ok);font-weight:700;font-size:14.5px}
+.form.sent .ok{display:block}
+.form.sent .f-grid,.form.sent .submit{display:none}
+.direct{display:grid;gap:12px;align-content:start}
+.direct .card{border-radius:var(--r-md);padding:16px;background:var(--paper);border:1px solid var(--line);display:flex;align-items:center;gap:12px}
+.direct .card svg{width:22px;height:22px;flex:none}
+.direct .card b{display:block;font-size:14px}
+.direct .card span{display:block;color:var(--muted);font-size:13px}
+
+/* ---------- Автор ---------- */
+.author{margin-top:0;border-radius:32px;padding:28px 22px;display:grid;gap:16px;position:relative;overflow:hidden;
+  background:linear-gradient(140deg,var(--paper),var(--bg-2))}
+.author::before{content:"";position:absolute;width:280px;height:280px;right:-100px;top:-110px;border-radius:50%;
+  background:radial-gradient(circle,color-mix(in srgb,var(--coral) 55%,transparent),transparent 70%)}
+.author .name{font-weight:900;font-size:clamp(26px,6vw,40px);line-height:1.05;letter-spacing:-.01em;position:relative}
+.author .sig{font-family:var(--font-hand);font-size:28px;background:linear-gradient(120deg,var(--rose),var(--coral));
+  -webkit-background-clip:text;background-clip:text;color:transparent;transform:rotate(-3deg);transform-origin:left}
 .author p{color:var(--muted);position:relative;max-width:46ch}
-.price-row{display:grid;gap:10px;position:relative}
-.offer{border-radius:var(--r-md);padding:14px 16px;background:var(--paper);color:#13283E}
-.offer b{display:block;font-family:var(--font-display);font-size:15px}
-.offer span{font-size:14px;color:#56708A}
-.contact-btns{display:flex;flex-wrap:wrap;gap:10px;position:relative}
-.contact-btns .btn{flex:1 1 140px;justify-content:center}
-.contact-list{display:grid;gap:4px;font-size:14px;color:var(--muted);position:relative;user-select:all}
-.contact-list b{color:var(--fg);user-select:all}
-.dock{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;gap:10px;
-  padding:10px var(--gutter) calc(10px + env(safe-area-inset-bottom,0px));
-  background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--hair);
-  transform:translateY(110%);transition:transform .3s}
-.dock.show{transform:none}
-.dock .btn{flex:1;justify-content:center;padding:13px 12px}
-@media (min-width:760px){.dock{display:none}}
 
-footer{padding-block:48px calc(96px + env(safe-area-inset-bottom,0px));color:var(--muted);font-size:13px}
-footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;border-top:1px solid var(--hair);padding-top:18px}
+/* ---------- Footer / sticky CTA ---------- */
+footer{padding-block:48px calc(110px + env(safe-area-inset-bottom,0px));color:var(--muted);font-size:13px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;border-top:1px solid var(--line);padding-top:18px}
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:50;display:flex;gap:10px;align-items:center;
+  padding:12px var(--gutter) calc(12px + env(safe-area-inset-bottom,0px));
+  background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-top:1px solid var(--line)}
+.dock .msg{flex:1;min-width:0;font-size:13px;color:var(--muted)}
+.dock .msg b{display:block;color:var(--fg);font-size:14.5px;font-family:var(--font-display)}
+.dock .btn{padding:13px 16px}
 
-dialog{border:0;padding:0;background:transparent;max-width:min(94vw,720px);max-height:92vh}
-dialog::backdrop{background:rgba(4,12,22,.78);backdrop-filter:blur(4px)}
-dialog img{max-height:86vh;width:auto;margin:auto;border-radius:6px;background:#fff}
-dialog button{display:block;margin:10px auto 0;font:600 14px/1 var(--font-body);padding:12px 18px;border-radius:999px;border:0;background:#fff;color:#0F2740;cursor:pointer}
+.totop{position:fixed;right:16px;bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:45;width:46px;height:46px;border-radius:50%;
+  border:1px solid var(--line);background:var(--paper);color:var(--fg);display:grid;place-items:center;cursor:pointer;
+  box-shadow:0 10px 22px -10px rgba(0,0,0,.3);opacity:0;transform:translateY(10px);pointer-events:none;transition:opacity .3s,transform .3s}
+.totop.show{opacity:1;transform:none;pointer-events:auto}
 
-@media (min-width:760px){
-  .hero-grid{grid-template-columns:1.1fr .9fr;grid-template-areas:"t v" "m v";column-gap:48px}
-  .hero-text{grid-area:t;align-self:end}.hero-video{grid-area:v}.hero-more{grid-area:m;align-self:start}
+@media (min-width:860px){
+  .hero-grid{grid-template-columns:1.15fr .85fr}
+  .menu-panel{max-width:420px}
   .types{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .hand-demo{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start;padding:20px}
-  .feat{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:28px}
-  .feat li:nth-last-child(2){border-bottom:1px solid var(--hair)}
-  .author{grid-template-columns:1.1fr .9fr;padding:36px}
-  .step{grid-template-columns:.8fr 1.2fr;align-items:center;gap:32px}
-}
-@media (prefers-reduced-motion:reduce){
-  .field b.typing::after{animation:none}
-  html{scroll-behavior:auto}
+  .pricing{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .hand-demo{grid-template-columns:1fr 1fr;align-items:start}
+  .stat-grid{grid-template-columns:repeat(4,1fr)}
+  .contact-grid{grid-template-columns:1.3fr .9fr}
+  .author{grid-template-columns:1.15fr .85fr;align-items:center;padding:40px}
+  .dock{justify-content:center}
+  .dock .msg{flex:0 0 auto}
 }
 </style>
-<div class="sky" aria-hidden="true"></div>
+</head>
+<body>
 
-<header class="top">
+<!-- NAV -->
+<header class="nav">
   <div class="wrap">
-    <a class="brand" href="#">
-      <svg class="dot" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l5 9-5 11-5-11z" fill="var(--drop)"/><circle cx="12" cy="11" r="1.8" fill="var(--bg)"/><path d="M12 13v9" stroke="var(--bg)" stroke-width="1.2"/></svg>
-      СРС генератор
-    </a>
-    <a class="cta-mini" href="https://wa.me/996221000330" target="_blank" rel="noopener">Байланышуу</a>
+    <a class="brand" href="#top"><span class="mark">С</span>СРС генератор</a>
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
+<div class="menu" id="menu">
+  <nav class="menu-panel" aria-label="Негизги меню">
+    <button class="menu-close" id="menuClose" aria-label="Жабуу">✕</button>
+    <a href="#how">Кантип иштейт<small>3 жол анимациясы</small></a>
+    <a href="#examples">Мисалдар<small>СРСтин 4 түрү</small></a>
+    <a href="#hand">Кол жазма<small>ар бир адамга өзүнчө</small></a>
+    <a href="#pricing">Баасы<small>3 план</small></a>
+    <a href="#faq">Көп суралган суроолор</a>
+    <a href="#contact">Байланыш<small>WhatsApp · Telegram</small></a>
+    <a class="btn btn-grad mcta" href="#contact">СРС заказ берүү</a>
+  </nav>
+</div>
 
-<main>
+<main id="top">
+  <!-- HERO -->
   <section class="hero">
+    <div class="hero-bg plx-layer" data-speed="0.25"><canvas id="particles"></canvas></div>
     <div class="wrap hero-grid">
-      <div class="hero-text">
-        <div class="eyebrow">Студенттин өз алдынча иши</div>
-        <h1><span class="srs">СРС</span><span class="sub">түзүүгө мүмкүн болгон сайт</span></h1>
+      <div>
+        <div class="eyebrow">Студенттин өз алдынча иши · онлайн</div>
+        <h1 style="margin-top:14px">СРС <span class="g">0дөн&nbsp;100%га</span><br>чейин өзү жазат</h1>
+        <p class="lead">Теманы жазасыз. Программа текстти, формуланы, таблицаны жана графикти түзүп, баарын сиздин кол жазмаңыз менен чыгарат.</p>
+        <div class="actions">
+          <a class="btn btn-grad" href="#contact">СРС заказ берүү</a>
+          <a class="btn btn-ghost" href="#how">Кантип иштейт</a>
+        </div>
+        <div class="stat-row">
+          <div class="stat"><b data-count="4" data-suffix="">0</b><span>СРС түрү</span></div>
+          <div class="stat"><b data-count="100" data-suffix="%">0</b><span>кол жазма менен</span></div>
+          <div class="stat"><b data-count="25" data-suffix=" сек">0</b><span>видео-демо</span></div>
+        </div>
       </div>
       <div class="hero-video">
-        <video id="promo" autoplay muted loop playsinline preload="auto" poster="img/poster.jpg" aria-label="СРС 0дөн 100%га чейин түзүлүп жаткан 25 секунддук анимация">
-          <source src="img/srs.mp4" type="video/mp4">
+        <video id="promo" autoplay muted loop playsinline preload="auto" poster="img/poster.jpg"
+          aria-label="СРС 0дөн 100%га чейин түзүлүп жаткан 25 секунддук анимация">
+          <source src="img/srs.mp4?v=3" type="video/mp4">
         </video>
-        <span class="live">25 сек · СРС 0 → 100%</span>
-      </div>
-      <div class="hero-more">
-        <p class="lead">Теманы жазасыз. Программа текстти, формуланы, таблицаны жана графикти түзүп, баарын кол жазма менен чыгарат.</p>
-        <p class="special glass">СРСтин өзгөчөлүгү: <em>ар бир адамдын кол жазмасын өзүндөй кылып</em> жасап берет. Эки студенттин СРСи эч качан окшош болбойт.</p>
-        <div class="actions">
-          <a class="btn btn-wa" href="https://wa.me/996221000330" target="_blank" rel="noopener">WhatsApp аркылуу жазуу</a>
-          <a class="btn btn-ghost glass" href="#how">Кантип иштейт</a>
-        </div>
+        <span class="tag">25 сек · 0 → 100%</span>
+        <button type="button" class="sound" id="sound" aria-pressed="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 9h4l5-4v14l-5-4H4z"/><path id="snd-wave" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M16 9.5a3.5 3.5 0 010 5M18.5 7a7 7 0 010 10" opacity="0"/><path id="snd-x" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M16.5 9.5l5 5M21.5 9.5l-5 5"/></svg>
+          <span id="sound-l">Үн</span>
+        </button>
       </div>
     </div>
   </section>
 
-  <!-- Скролл кылганда 3 жолу менен СРС жасалып жатканын көрсөтөт -->
-  <section class="story" id="how" aria-label="СРС 3 жол менен жасалат">
-    <div class="sticky wrap">
-      <div class="story-head">
-        <h2>СРС 3 жол менен жасалат</h2>
-        <p>Ылдый сыдырыңыз: программа иштеп жаткан учурду көрөсүз.</p>
-      </div>
+  <div class="rail" aria-hidden="true">
+    <div class="rail-track">
+      <span>Электроника</span><span>Физика</span><span>Математика</span><span>Информатика</span><span>Кыргыз тили</span><span>Тарых</span><span>Экономика</span><span>Химия</span>
+      <span>Электроника</span><span>Физика</span><span>Математика</span><span>Информатика</span><span>Кыргыз тили</span><span>Тарых</span><span>Экономика</span><span>Химия</span>
+    </div>
+  </div>
 
-      <div class="stage">
-        <div class="step on" data-step="0">
-          <div class="cap">
-            <span class="n">1-жол</span>
+  <!-- HOW: timeline storytelling -->
+  <section class="sec story" id="how">
+    <div class="wrap">
+      <div class="eyebrow">Кантип иштейт</div>
+      <h2 style="margin-top:10px">Үч кадам — даяр СРС</h2>
+      <p class="intro">Ылдый сыдырганда ар бир кадам иштеп жатканын көрөсүз.</p>
+
+      <div style="position:relative;margin-top:30px">
+        <div class="story-line"><i id="storyFill"></i></div>
+        <div class="story-steps" id="storySteps">
+          <div class="step" data-i="0">
+            <div class="dot">1</div>
             <h3>Теманы жазасыз</h3>
-            <p>Предметти, теманы жана барак санын киргизесиз. Калганын программа өзү жасайт.</p>
+            <p>Предметти, теманы жана барак санын киргизесиз. Калганын программа өзү аткарат.</p>
+            <div class="ph"><img src="img/hand.jpg" alt="Тема киргизүү" loading="lazy" width="1100" height="395"></div>
           </div>
-          <div class="vis glass">
-            <div class="form">
-              <label class="field"><span>Предмет</span><b id="f-subj">Электроника</b></label>
-              <label class="field"><span>Тема</span><b id="f-topic">Нанотүтүкчө</b></label>
-              <label class="field"><span>Барак саны</span><b id="f-pages">5</b></label>
-              <div class="chips"><span class="chip">КУУ</span><span class="chip">Физика жана электроника</span><span class="chip">Эн 1-23 б</span></div>
-              <span class="btn btn-drop go" id="f-go">СРС түзүү</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="step" data-step="1">
-          <div class="cap">
-            <span class="n">2-жол</span>
+          <div class="step" data-i="1">
+            <div class="dot">2</div>
             <h3>Программа текстти жазат</h3>
             <p>Кириш, негизги бөлүм, формулалар, таблица, график жана адабияттар. Кыргыз тилинин грамматикасы текшерилет.</p>
+            <div class="ph"><img src="img/formula.jpg" alt="Формулалар менен барак" loading="lazy" width="1000" height="447"></div>
           </div>
-          <div class="vis glass">
-            <div class="sheet" id="printed">
-              <h4>Кириш</h4>
-              <p class="txt"><span class="ln">Электрондук нанотүтүкчө – бул микроскопиялык масштабда электр</span> <span class="ln">тогунун өткөрүлүшүн камсыз кылган, наноматериалдардан түзүлгөн</span> <span class="ln">курал болуп, заманбап маалыматтык жана энергетикалык</span> <span class="ln">системаларда кеңири колдонулат. Бул технологиянын өнүгүшү</span> <span class="ln">нанофизика, материалдык илимдер жана микроэлектроника</span> <span class="ln formula">σ = n · e · μ</span> <span class="ln">мында n – заряд ташуучулардын тыгыздыгы, e – элементардык</span> <span class="ln">заряд, μ – мобилдүүлүк. Нанотүтүкчөдө n жана μ чоң мааниге ээ.</span></p>
-              <div class="badges">
-                <span class="badge" data-at=".35">✓ Формула</span>
-                <span class="badge" data-at=".6">✓ Таблица жана график</span>
-                <span class="badge" data-at=".85">✓ Грамматика текшерилди</span>
-              </div>
-            </div>
-            <div class="meter"><i></i></div>
-            <div class="meter-l"><span>Текст жазылууда</span><span id="pct">100%</span></div>
-          </div>
-        </div>
-
-        <div class="step" data-step="2">
-          <div class="cap">
-            <span class="n">3-жол</span>
+          <div class="step" data-i="2">
+            <div class="dot">3</div>
             <h3>Кол жазмага айланат</h3>
             <p>Даяр текст сиздин почеркуңуз менен баракка жазылат. Word же PDF кылып алып, басып чыгарасыз.</p>
-          </div>
-          <div class="vis glass">
-            <div class="sheet hand">
-              <div class="hand-wrap" id="handwrap">
-                <img src="img/page02.jpg" alt="Кол жазма менен жазылган СРСтин «Кириш» барагы" width="640" height="905">
-                <svg class="pen" viewBox="0 0 34 34" aria-hidden="true"><path d="M4 30l3-9L24 4l6 6-17 17-9 3z" fill="#1D3270"/><path d="M24 4l6 6 2-2a2 2 0 000-3l-3-3a2 2 0 00-3 0l-2 2z" fill="#39B6D3"/></svg>
-              </div>
-            </div>
+            <div class="ph"><img src="img/page02.jpg" alt="Кол жазма менен жазылган барак" loading="lazy" width="640" height="905"></div>
           </div>
         </div>
-      </div>
-
-      <div class="rail" aria-hidden="true">
-        <div class="on"><i></i>1 · Тема</div>
-        <div><i></i>2 · Текст</div>
-        <div><i></i>3 · Кол жазма</div>
       </div>
     </div>
   </section>
 
-  <section class="sec" id="examples">
+  <!-- EXAMPLES -->
+  <section class="sec" id="examples" style="background:var(--paper);border-block:1px solid var(--line)">
     <div class="wrap">
       <div class="eyebrow">Мисалы</div>
       <h2 style="margin-top:10px">СРСтин 4 түрү</h2>
-      <p class="intro">Бул мисалдардын баары программада түзүлгөн чыныгы СРСтен алынды: «Электроника» предмети, тема «Нанотүтүкчө».</p>
-
+      <p class="intro">Мисалдар программада чыныгы түзүлгөн СРСтен алынды: «Электроника» предмети, тема «Нанотүтүкчө».</p>
       <div class="types">
-        <article class="type glass">
-          <div class="ph"><img src="img/hand.jpg" alt="Теориялык текст, кол жазма" loading="lazy" width="1100" height="395"></div>
-          <span class="tag">1-түрү</span>
-          <h3>Теориялык баяндама</h3>
-          <p>Кириш, негизги бөлүм жана корутунду. Гуманитардык жана социалдык предметтер үчүн ылайыктуу.</p>
+        <article class="type">
+          <div class="ph"><img src="img/hand.jpg" alt="Теориялык текст" loading="lazy" width="1100" height="395"></div>
+          <span class="tag">1-түрү</span><h3>Теориялык баяндама</h3>
+          <p>Кириш, негизги бөлүм жана корутунду. Гуманитардык жана социалдык предметтер үчүн.</p>
         </article>
-        <article class="type glass">
-          <div class="ph"><img src="img/formula.jpg" alt="Формулалар менен жазылган барак" loading="lazy" width="1000" height="447"></div>
-          <span class="tag">2-түрү</span>
-          <h3>Формулалар менен</h3>
-          <p>Физика, математика, химия. Ар бир формуланын белгилери түшүндүрүлөт.</p>
+        <article class="type">
+          <div class="ph"><img src="img/formula.jpg" alt="Формулалар" loading="lazy" width="1000" height="447"></div>
+          <span class="tag">2-түрү</span><h3>Формулалар менен</h3>
+          <p>Физика, математика, химия. Ар бир белги түшүндүрүлөт.</p>
         </article>
-        <article class="type glass">
-          <div class="ph"><img src="img/table.jpg" alt="Колдо сызылган таблица" loading="lazy" width="900" height="240"></div>
-          <span class="tag">3-түрү</span>
-          <h3>Таблица менен</h3>
-          <p>Салыштыруу жана классификация. Таблица да кол жазма менен сызылат.</p>
+        <article class="type">
+          <div class="ph"><img src="img/table.jpg" alt="Таблица" loading="lazy" width="900" height="240"></div>
+          <span class="tag">3-түрү</span><h3>Таблица менен</h3>
+          <p>Салыштыруу жана классификация, кол жазма менен сызылат.</p>
         </article>
-        <article class="type glass">
-          <div class="ph">
-            <img src="img/chart.jpg" alt="График" loading="lazy" width="800" height="517">
-            <img src="img/scheme.jpg" alt="Электр схемасы" loading="lazy" width="900" height="465">
-          </div>
-          <span class="tag">4-түрү</span>
-          <h3>График жана схема менен</h3>
-          <p>Эксперимент маалыматтары графикке, электр чынжырлары схемага түшүрүлөт.</p>
+        <article class="type">
+          <div class="ph"><img src="img/chart.jpg" alt="График" loading="lazy" width="800" height="517"></div>
+          <span class="tag">4-түрү</span><h3>График жана схема менен</h3>
+          <p>Эксперимент маалыматтары графикке, чынжырлар схемага түшөт.</p>
         </article>
-      </div>
-
-      <h3 style="font-family:var(--font-display);font-size:19px;margin-top:40px">Даяр СРСтин барактары</h3>
-      <div class="meta-row"><span class="chip">Предмет: Электроника</span><span class="chip">Тема: Нанотүтүкчө</span><span class="chip">Аткарган: Орозбий Ходжебеков</span></div>
-      <div class="pages" id="pages">
-        <button type="button" data-src="img/page01.jpg"><img src="img/page01.jpg" alt="Титулдук барак" loading="lazy" width="640" height="905"><span>Титулдук барак</span></button>
-        <button type="button" data-src="img/page02.jpg"><img src="img/page02.jpg" alt="Кириш" loading="lazy" width="640" height="905"><span>Кириш</span></button>
-        <button type="button" data-src="img/page07.jpg"><img src="img/page07.jpg" alt="Таблица" loading="lazy" width="640" height="905"><span>Таблица</span></button>
-        <button type="button" data-src="img/page08.jpg"><img src="img/page08.jpg" alt="График" loading="lazy" width="640" height="905"><span>График</span></button>
-        <button type="button" data-src="img/page14.jpg"><img src="img/page14.jpg" alt="Схема жана адабияттар" loading="lazy" width="640" height="905"><span>Схема жана адабияттар</span></button>
       </div>
     </div>
   </section>
 
+  <!-- HANDWRITING -->
   <section class="sec" id="hand">
     <div class="wrap">
-      <div class="eyebrow">Ар ким үчүн өзүнчө</div>
-      <h2 style="margin-top:10px">Кол жазма ар бир адамдыкындай болот</h2>
-      <p class="intro">Бул программанын эң негизги өзгөчөлүгү. СРС ар бир адамдын өз кол жазмасына окшоп жазылат: тамгалардын формасы, жантаюусу, чоңдугу жана сия түсү ошол адамдыкындай болот. Почерк өзгөрсө, СРСтин кол жазмасы да ошого жараша өзгөрөт.</p>
-
-      <div class="hand-demo glass">
+      <div class="eyebrow">Өзгөчөлүгү</div>
+      <h2 style="margin-top:10px">Ар бир адамга өз почерки</h2>
+      <p class="intro">Тамгалардын формасы, жантаюусу, чоңдугу жана сия түсү сиздикиндей болот. Эки студенттин СРСи эч качан окшош болбойт.</p>
+      <div class="hand-demo">
         <div style="display:grid;gap:12px;min-width:0">
           <div class="styles" role="group" aria-label="Почерк тандоо">
             <button type="button" aria-pressed="true" data-style="0">Айбек</button>
@@ -443,57 +430,147 @@ dialog button{display:block;margin:10px auto 0;font:600 14px/1 var(--font-body);
             <div class="who" id="who">Айбектин почерки</div>
             <div class="script" id="script">Нанотүтүкчө – бул микроскопиялык масштабда электр тогун өткөрүүчү курал.</div>
           </div>
-          <small style="color:var(--muted);font-size:13px">Бул почерктер мисал катары гана көрсөтүлдү.</small>
         </div>
-        <div style="min-width:0">
-          <ol class="howto">
-            <li><div><b>Почеркуңузду киргизесиз</b><p style="color:var(--muted);font-size:14.5px">Тамгаларыңызды программага бир жолу жазып бересиз.</p></div></li>
-            <li><div><b>Программа үйрөнөт</b><p style="color:var(--muted);font-size:14.5px">Ар бир тамганын формасы, жантаюусу жана сия түсү сакталат.</p></div></li>
-            <li><div><b>СРС сиздин колуңуз менен</b><p style="color:var(--muted);font-size:14.5px">Ар бир жаңы СРС ушул почерк менен жазылат.</p></div></li>
-          </ol>
-          <div class="real">
-            <div class="ph"><img src="img/refs.jpg" alt="Колдонулган адабияттар, кол жазма" loading="lazy" width="900" height="371"></div>
-            <small>Чыныгы мисал: программа жазган «Колдонулган адабияттар» бөлүмү.</small>
-          </div>
+        <ol class="howto">
+          <li><div><b>Почеркуңузду киргизесиз</b><p>Тамгаларыңызды программага бир жолу жазып бересиз.</p></div></li>
+          <li><div><b>Программа үйрөнөт</b><p>Ар бир тамганын формасы жана сия түсү сакталат.</p></div></li>
+          <li><div><b>СРС сиздин колуңуз менен</b><p>Ар бир жаңы СРС ушул почерк менен жазылат.</p></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="sec stats-sec">
+    <div class="wrap">
+      <div class="eyebrow" style="background:none;color:rgba(255,255,255,.85);-webkit-text-fill-color:rgba(255,255,255,.85)">Сандарда</div>
+      <h2 style="margin-top:10px">Программа эмне кыла алат</h2>
+      <p class="intro">КУУнун бардык багыттары үчүн, грамматикасы текшерилген СРС.</p>
+      <div class="stat-grid">
+        <div class="sb"><b data-count="30" data-suffix="+">0</b><span>предмет багыты</span></div>
+        <div class="sb"><b data-count="4" data-suffix="">0</b><span>СРС түрү</span></div>
+        <div class="sb"><b data-count="100" data-suffix="%">0</b><span>кол жазма менен</span></div>
+        <div class="sb"><b data-count="2" data-suffix=" мүн">0</b><span>орточо убакыт</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="sec" id="pricing" style="background:var(--paper);border-block:1px solid var(--line)">
+    <div class="wrap">
+      <div class="eyebrow">Баасы</div>
+      <h2 style="margin-top:10px">Кандай план тандайсыз</h2>
+      <p class="intro">СРСти бир жолу заказ бересизби, же программаны өзүңүз пайдаланасызбы — тандоо сизде.</p>
+      <div class="pricing">
+        <div class="plan">
+          <h3>Бир жолку СРС</h3>
+          <div class="price">500 сом<small> / 1 СРС</small></div>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4L19 6"/></svg>5 барак, кол жазма менен</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4L19 6"/></svg>Формула, таблица, график</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4L19 6"/></svg>Word + PDF файл</li>
+          </ul>
+          <a class="btn btn-ghost" href="#contact">Заказ берүү</a>
+        </div>
+        <div class="plan feat">
+          <span class="pill">Эң сурамжылуу</span>
+          <h3>5 СРС пакети</h3>
+          <div class="price">2000 сом<small> / семестр</small></div>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4L19 6"/></svg>5 түрдүү предмет</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4L19 6"/></svg>Ар бирине өз почерк</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4L19 6"/></svg>Биринчи кезекте даярдалат</li>
+          </ul>
+          <a class="btn btn-grad" href="#contact">Пакетти алуу</a>
+        </div>
+        <div class="plan">
+          <h3>Программаны сатып алуу</h3>
+          <div class="price">Сүйлөшүү<small> боюнча</small></div>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4L19 6"/></svg>«СРС генератор» толук программа</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4L19 6"/></svg>Чексиз СРС түзүү</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4L19 6"/></svg>Орнотуу боюнча жардам</li>
+          </ul>
+          <a class="btn btn-ghost" href="#contact">Сүйлөшүү</a>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="sec">
+  <!-- FAQ -->
+  <section class="sec" id="faq">
     <div class="wrap">
-      <div class="eyebrow">Мүмкүнчүлүктөр</div>
-      <h2 style="margin-top:10px">Программа эмне кыла алат</h2>
-      <ul class="feat">
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 5h16M4 12h16M4 19h10"/></svg><div><b>КУУнун бардык багыттары</b><p>Бардык факультеттердин предметтери боюнча СРС.</p></div></li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12l4 4L19 6"/></svg><div><b>Кыргыз тилинин грамматикасы</b><p>Текст жазылып жатканда ката текшерилип, оңдолот.</p></div></li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><div><b>Формула, таблица, график, схема</b><p>Тема талап кылса, программа өзү кошот.</p></div></li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 17c3-6 5 2 8-4s5 2 10-4"/></svg><div><b>Өзүңүздүн кол жазмаңыз</b><p>Ар бир адам үчүн өзүнчө почерк.</p></div></li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 3h7l5 5v13H7z M14 3v5h5"/></svg><div><b>Word жана PDF</b><p>Титулдук барагы менен даяр файл, дароо басып чыгарууга болот.</p></div></li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4h6v16H4zM14 4h6v16h-6z"/></svg><div><b>Китепкана</b><p>Түзүлгөн СРСтер сакталат, кайра ачып оңдосо болот.</p></div></li>
-      </ul>
+      <div class="eyebrow">Суроолор</div>
+      <h2 style="margin-top:10px">Көп суралган суроолор</h2>
+      <div class="faq">
+        <details class="qa" open>
+          <summary>СРС канча убакытта даяр болот?<span class="plus"></span></summary>
+          <p class="a">Теманын татаалдыгына жараша, орточо 1-3 мүнөттө текст жана кол жазма даяр болот. Бир жолку заказдарда калыбы 24 сааттын ичинде жооп беребиз.</p>
+        </details>
+        <details class="qa">
+          <summary>Кол жазма ким экенин билдирбейби?<span class="plus"></span></summary>
+          <p class="a">Жок. Почерк сизге окшотулуп жасалат, бирок ал чыныгы кол жазма эмес, компьютер түзгөн сүрөт. Кандай колдонуу керектигин өзүңүз чечесиз.</p>
+        </details>
+        <details class="qa">
+          <summary>Кайсы предметтер колдоого алынат?<span class="plus"></span></summary>
+          <p class="a">КУУнун бардык факультеттериндеги негизги предметтер: электроника, физика, математика, информатика, тил жана коомдук илимдер.</p>
+        </details>
+        <details class="qa">
+          <summary>Программаны өзүм сатып ала алабы?<span class="plus"></span></summary>
+          <p class="a">Ооба. «СРС генератор» Flutter колдонмосу сатылат. Байланыш формасы аркылуу жазыңыз, шарттарын сүйлөшөбүз.</p>
+        </details>
+      </div>
     </div>
   </section>
 
-  <section class="sec" id="buy">
+  <!-- CONTACT -->
+  <section class="sec" id="contact" style="background:var(--paper);border-block:1px solid var(--line)">
     <div class="wrap">
-      <div class="author glass">
-        <div style="display:grid;gap:14px;position:relative">
-          <div class="eyebrow">Автор</div>
-          <div class="name">Ходжебеков<br>Орозбий</div>
-          <div class="sig">О. Ходжебеков</div>
-          <p>СРСти Ходжебеков Орозбий өзүнүн «СРС генератор» программасында түзүп берет. Программанын өзү да сатылат.</p>
-        </div>
-        <div class="price-row">
-          <div class="offer"><b>СРС заказ кылуу</b><span>Тема, предмет жана барак санын айтасыз, СРС сиздин почеркуңуз менен даярдалат.</span></div>
-          <div class="offer"><b>Программаны сатып алуу</b><span>«СРС генератор» программасы сатылат. СРСти өзүңүз каалаган убакта түзөсүз.</span></div>
-          <div class="contact-btns">
-            <a class="btn btn-wa" href="https://wa.me/996221000330" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 01-3.3-2.9c-.2-.4.2-.4.7-1.3a.5.5 0 000-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 00-.7.3 3 3 0 00-.9 2.2 5.2 5.2 0 001.1 2.7 11.8 11.8 0 004.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 001.8-1.3 2.2 2.2 0 00.1-1.3c0-.1-.2-.2-.5-.3z"/></svg>WhatsApp</a>
-            <a class="btn btn-tg" href="https://t.me/Khodzhebekovv" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21.9 4.3l-3.2 15c-.2 1-.9 1.3-1.8.8l-4.8-3.6-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2L6.4 13l-4.7-1.5c-1-.3-1-1 .2-1.5l18.5-7.1c.9-.3 1.6.2 1.5 1.4z"/></svg>Telegram</a>
+      <div class="eyebrow">Байланыш</div>
+      <h2 style="margin-top:10px">СРС заказ берели</h2>
+      <p class="intro">Форманы толтуруңуз, же түз WhatsApp / Telegram аркылуу жазыңыз.</p>
+      <div class="contact-grid">
+        <form class="form" id="cform" novalidate>
+          <div class="f-grid" style="display:grid;gap:14px">
+            <div class="f-row" id="row-name">
+              <label for="f-name">Атыңыз</label>
+              <input id="f-name" name="name" type="text" placeholder="Атыңызды жазыңыз" autocomplete="name">
+              <span class="err"></span>
+            </div>
+            <div class="f-row" id="row-contact">
+              <label for="f-contact">WhatsApp же Telegram</label>
+              <input id="f-contact" name="contact" type="text" placeholder="+996 ХХХ ХХХ ХХХ же @колдонуучу">
+              <span class="err"></span>
+            </div>
+            <div class="f-row" id="row-topic">
+              <label for="f-topic">Предмет жана тема</label>
+              <input id="f-topic" name="topic" type="text" placeholder="Мисалы: Электроника — Нанотүтүкчө">
+              <span class="err"></span>
+            </div>
+            <div class="f-row" id="row-msg">
+              <label for="f-msg">Кошумча маалымат</label>
+              <textarea id="f-msg" name="message" rows="3" placeholder="Барак саны, мөөнөтү ж.б."></textarea>
+              <span class="err"></span>
+            </div>
           </div>
-          <div class="contact-list">
-            <span>WhatsApp: <b>+996 221 000 330</b></span>
-            <span>Telegram: <b>@Khodzhebekovv</b></span>
+          <button class="btn btn-grad submit" type="submit">Сурап жиберүү</button>
+          <p class="ok">✓ Рахмат! Биз менен тезинен WhatsApp же Telegram аркылуу байланышыңыз — бул форма түздөн-түз жөнөтпөйт.</p>
+        </form>
+        <div class="direct">
+          <a class="card" href="https://wa.me/996221000330" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="#1FA855" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2z"/></svg>
+            <span><b>WhatsApp</b><span>+996 221 000 330</span></span>
+          </a>
+          <a class="card" href="https://t.me/Khodzhebekovv" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="#26A5E4" aria-hidden="true"><path d="M21.9 4.3l-3.2 15c-.2 1-.9 1.3-1.8.8l-4.8-3.6-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2L6.4 13l-4.7-1.5c-1-.3-1-1 .2-1.5l18.5-7.1c.9-.3 1.6.2 1.5 1.4z"/></svg>
+            <span><b>Telegram</b><span>@Khodzhebekovv</span></span>
+          </a>
+          <div class="author" style="margin-top:4px">
+            <div>
+              <div class="name">Ходжебеков<br>Орозбий</div>
+              <div class="sig">О. Ходжебеков</div>
+              <p style="margin-top:10px">СРСти жана «СРС генератор» программасын Ходжебеков Орозбий түзөт. Программанын өзү да сатылат.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -501,149 +578,234 @@ dialog button{display:block;margin:10px auto 0;font:600 14px/1 var(--font-body);
   </section>
 </main>
 
-<nav class="dock" id="dock" aria-label="Байланыш">
-  <a class="btn btn-wa" href="https://wa.me/996221000330" target="_blank" rel="noopener">WhatsApp</a>
-  <a class="btn btn-tg" href="https://t.me/Khodzhebekovv" target="_blank" rel="noopener">Telegram</a>
-</nav>
 <footer>
   <div class="wrap">
     <span>© 2026 Ходжебеков Орозбий</span>
-    <span>WhatsApp +996 221 000 330 · Telegram @Khodzhebekovv</span>
+    <span>СРС генератор</span>
   </div>
 </footer>
 
-<dialog id="viewer" aria-label="Барак">
-  <img id="viewer-img" src="" alt="СРСтин барагы">
-  <button type="button" id="viewer-close">Жабуу</button>
-</dialog>
+<nav class="dock" aria-label="Байланыш">
+  <span class="msg"><b>СРС даярбы?</b>Азыр жазыңыз</span>
+  <a class="btn btn-wa" href="https://wa.me/996221000330" target="_blank" rel="noopener">WhatsApp</a>
+  <a class="btn btn-tg" href="https://t.me/Khodzhebekovv" target="_blank" rel="noopener">Telegram</a>
+</nav>
+<button class="totop" id="totop" aria-label="Жогору чыгуу">
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
 
 <script>
 (function(){
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var story = document.querySelector('.story');
-  var steps = story.querySelectorAll('.step');
-  var rail = story.querySelectorAll('.rail div');
-  var topicEl = document.getElementById('f-topic');
-  var subjEl = document.getElementById('f-subj');
-  var pagesEl = document.getElementById('f-pages');
-  var goEl = document.getElementById('f-go');
-  var lines = story.querySelectorAll('#printed .ln');
-  var badges = story.querySelectorAll('.badge');
-  var pct = document.getElementById('pct');
-  var printedVis = steps[1].querySelector('.vis');
-  var handWrap = document.getElementById('handwrap');
-  var SUBJ = 'Электроника', TOPIC = 'Нанотүтүкчө', PAGES = '5';
 
-  function clamp(v){ return v < 0 ? 0 : v > 1 ? 1 : v; }
-  function slice(s, t){ return s.slice(0, Math.round(s.length * clamp(t))); }
+  /* ---------- Гамбургер меню ---------- */
+  var burger=document.getElementById('burger'), menu=document.getElementById('menu'), mclose=document.getElementById('menuClose');
+  function openMenu(){ menu.classList.add('open'); burger.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; }
+  function closeMenu(){ menu.classList.remove('open'); burger.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
+  burger.addEventListener('click', function(){ menu.classList.contains('open') ? closeMenu() : openMenu(); });
+  mclose.addEventListener('click', closeMenu);
+  menu.addEventListener('click', function(e){ if (e.target === menu) closeMenu(); });
+  menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeMenu); });
 
-  function render(p){
-    var idx = Math.min(2, Math.floor(p * 3));
-    var t = clamp(p * 3 - idx);
-    steps.forEach(function(s, i){ s.classList.toggle('on', i === idx); });
-    rail.forEach(function(r, i){
-      r.classList.toggle('on', i <= idx);
-      r.querySelector('i').style.setProperty('--f', i < idx ? 1 : i === idx ? t : 0);
-    });
-    // 1-жол: терүү
-    var a = clamp(t / .3), b = clamp((t - .3) / .45), c = clamp((t - .75) / .1);
-    subjEl.textContent = slice(SUBJ, a);
-    topicEl.textContent = slice(TOPIC, b);
-    pagesEl.textContent = c > 0 ? PAGES : '';
-    subjEl.classList.toggle('typing', idx === 0 && a < 1);
-    topicEl.classList.toggle('typing', idx === 0 && a >= 1 && b < 1);
-    goEl.classList.toggle('pressed', idx === 0 && t > .88);
-    // 2-жол: басма текст
-    var t2 = idx > 1 ? 1 : idx < 1 ? 0 : t;
-    var n = lines.length;
-    lines.forEach(function(l, i){ l.style.setProperty('--w', clamp(t2 * n - i)); });
-    badges.forEach(function(bd){ bd.style.setProperty('--o', t2 >= parseFloat(bd.dataset.at) ? 1 : 0); });
-    printedVis.style.setProperty('--t', t2);
-    pct.textContent = Math.round(t2 * 100) + '%';
-    // 3-жол: кол жазма
-    var t3 = idx < 2 ? 0 : clamp(t / .92);
-    handWrap.style.setProperty('--t', t3);
-    handWrap.style.setProperty('--done', t3 >= 1 ? 1 : 0);
-    handWrap.style.setProperty('--px', ((t3 * 9) % 1).toFixed(3));
-  }
-
-  if (!reduce) {
-    story.classList.add('is-live');
-    var ticking = false;
-    function onScroll(){
-      if (ticking) return; ticking = true;
-      requestAnimationFrame(function(){
-        ticking = false;
-        var r = story.getBoundingClientRect();
-        var total = story.offsetHeight - window.innerHeight;
-        render(total > 0 ? clamp(-r.top / total) : 1);
+  /* ---------- Canvas бөлүкчөлөр (hero фон) ---------- */
+  var cv = document.getElementById('particles');
+  if (cv && !reduce) {
+    var ctx = cv.getContext('2d');
+    var heroEl = cv.parentElement;
+    var W=0,H=0,pts=[];
+    function resize(){
+      W = heroEl.clientWidth; H = heroEl.clientHeight;
+      cv.width = W * devicePixelRatio; cv.height = H * devicePixelRatio;
+      cv.style.width = W+'px'; cv.style.height = H+'px';
+      ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
+      var n = Math.min(70, Math.round(W*H/16000));
+      pts = Array.from({length:n}, function(){
+        return { x: Math.random()*W, y: Math.random()*H, r: 1+Math.random()*2.2,
+          vx:(Math.random()-.5)*.25, vy:(Math.random()-.5)*.25, c: Math.random()<.5 };
       });
     }
-    window.addEventListener('scroll', onScroll, {passive:true});
-    window.addEventListener('resize', onScroll);
-    onScroll();
+    var ro = new ResizeObserver(resize); ro.observe(heroEl); resize();
+    function tick(){
+      ctx.clearRect(0,0,W,H);
+      for (var i=0;i<pts.length;i++){
+        var p = pts[i];
+        p.x += p.vx; p.y += p.vy;
+        if (p.x<0) p.x=W; if (p.x>W) p.x=0; if (p.y<0) p.y=H; if (p.y>H) p.y=0;
+        ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle = p.c ? 'rgba(244,63,94,.35)' : 'rgba(251,146,60,.35)';
+        ctx.fill();
+      }
+      for (var i=0;i<pts.length;i++) for (var j=i+1;j<pts.length;j++){
+        var a=pts[i], b=pts[j], dx=a.x-b.x, dy=a.y-b.y, d=Math.sqrt(dx*dx+dy*dy);
+        if (d < 110) { ctx.strokeStyle = 'rgba(244,63,94,'+(0.12*(1-d/110))+')'; ctx.lineWidth=1;
+          ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke(); }
+      }
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
   }
 
-  // Почерк демосу
+  /* ---------- Parallax катмарлар ---------- */
+  var plxLayers = document.querySelectorAll('.plx-layer');
+  function onParallax(){
+    var sy = window.scrollY;
+    plxLayers.forEach(function(el){
+      var speed = parseFloat(el.dataset.speed || 0.2);
+      el.style.transform = 'translateY(' + (sy*speed) + 'px)';
+    });
+  }
+  if (!reduce) window.addEventListener('scroll', onParallax, {passive:true});
+
+  /* ---------- Timeline (story) scroll-прогресс ---------- */
+  var storySteps = document.querySelectorAll('.step');
+  var storyFill = document.getElementById('storyFill');
+  var storyWrap = document.getElementById('storySteps');
+  function onStory(){
+    var r = storyWrap.getBoundingClientRect();
+    var vh = window.innerHeight;
+    var total = r.height - vh*0.4;
+    var passed = Math.min(Math.max((vh*0.68 - r.top), 0), Math.max(total,1));
+    var p = total>0 ? passed/total : (r.top < vh*0.5 ? 1:0);
+    storyFill.style.setProperty('--p', Math.round(Math.min(1,Math.max(0,p))*100)+'%');
+    var activeIdx = Math.floor(p * storySteps.length);
+    storySteps.forEach(function(s,i){ s.classList.toggle('active', i <= activeIdx); });
+  }
+  window.addEventListener('scroll', onStory, {passive:true}); onStory();
+
+  /* ---------- Санап чыгуучу статистика ---------- */
+  var counters = document.querySelectorAll('[data-count]');
+  var counted = new WeakSet();
+  function animateCount(el){
+    if (counted.has(el)) return; counted.add(el);
+    var target = parseFloat(el.dataset.count), suf = el.dataset.suffix || '';
+    var start = performance.now(), dur = 1100;
+    function step(now){
+      var t = Math.min(1,(now-start)/dur), e = 1-Math.pow(1-t,3);
+      el.textContent = Math.round(target*e) + suf;
+      if (t<1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  var cio = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if (en.isIntersecting) animateCount(en.target); });
+  }, {threshold:.5});
+  counters.forEach(function(c){ cio.observe(c); });
+
+  /* ---------- Видео: үн ---------- */
+  var promo = document.getElementById('promo');
+  var sbtn = document.getElementById('sound');
+  var userMuted = false;
+  function setUI(on){
+    sbtn.setAttribute('aria-pressed', String(on));
+    document.getElementById('sound-l').textContent = on ? 'Үн өч.' : 'Үн';
+    document.getElementById('snd-wave').setAttribute('opacity', on ? '1' : '0');
+    document.getElementById('snd-x').setAttribute('opacity', on ? '0' : '1');
+  }
+  function soundOn(restart){
+    promo.muted = false; promo.volume = 0.9;
+    if (restart) promo.currentTime = 0;
+    var pp = promo.play(); setUI(true);
+    if (pp && pp.catch) pp.catch(function(){ promo.muted = true; setUI(false); promo.play().catch(function(){}); });
+  }
+  function armFirstTouch(){
+    var evs = ['pointerdown','touchend','click','keydown'];
+    function go(e){
+      evs.forEach(function(n){ document.removeEventListener(n, go, true); });
+      if (userMuted || (e && sbtn.contains(e.target))) return;
+      soundOn(true);
+    }
+    evs.forEach(function(n){ document.addEventListener(n, go, true); });
+  }
+  function startWithSound(){
+    promo.muted = false; promo.volume = 0.9;
+    var pr = promo.play();
+    if (pr && pr.then) {
+      pr.then(function(){ setUI(true); }).catch(function(){
+        promo.muted = true; setUI(false); promo.play().catch(function(){ promo.controls = true; }); armFirstTouch();
+      });
+    } else { setUI(!promo.muted); }
+  }
+  sbtn.addEventListener('click', function(){
+    if (promo.muted) { userMuted = false; soundOn(true); }
+    else { userMuted = true; promo.muted = true; setUI(false); }
+  });
+  if (reduce) { promo.removeAttribute('autoplay'); promo.pause(); promo.controls = true; } else { startWithSound(); }
+
+  /* ---------- Почерк демо ---------- */
   var styles = [
-    {name:'Айбектин почерки', color:'#1D3270', size:27, skew:-6, rot:2.2, dy:1.6, ls:'0', w:500, sx:1},
-    {name:'Нуризанын почерки', color:'#5A2D82', size:30, skew:4, rot:4.5, dy:2.6, ls:'.03em', w:700, sx:1.05},
-    {name:'Бекзаттын почерки', color:'#0E3B3A', size:25, skew:-14, rot:1.2, dy:1, ls:'-.01em', w:400, sx:.88}
+    {name:'Айбектин почерки', c:'#1F0A12', w:500, sz:27, sk:-6, rot:2.2, dy:1.6, sx:1},
+    {name:'Нуризанын почерки', c:'#BE123C', w:700, sz:30, sk:4, rot:4.5, dy:2.6, sx:1.05},
+    {name:'Бекзаттын почерки', c:'#C2410C', w:400, sz:25, sk:-14, rot:1.2, dy:1, sx:.88}
   ];
-  var script = document.getElementById('script');
-  var who = document.getElementById('who');
-  var text = script.textContent;
-  script.textContent = '';
-  var letters = [];
+  var script = document.getElementById('script'), who = document.getElementById('who');
+  var text = script.textContent; script.textContent=''; var letters=[];
   text.split(/(\s+)/).forEach(function(word){
     if (/^\s+$/.test(word)) { script.appendChild(document.createTextNode(' ')); return; }
-    var w = document.createElement('span');
-    w.style.whiteSpace = 'nowrap';
-    for (var i = 0; i < word.length; i++) {
-      var s = document.createElement('span'); s.textContent = word[i]; w.appendChild(s); letters.push(s);
-    }
+    var w = document.createElement('span'); w.style.whiteSpace='nowrap';
+    for (var i=0;i<word.length;i++){ var s=document.createElement('span'); s.textContent=word[i]; w.appendChild(s); letters.push(s); }
     script.appendChild(w);
   });
-  function rnd(seed){ var x = Math.sin(seed) * 10000; return x - Math.floor(x); }
+  function rnd(seed){ var x=Math.sin(seed)*10000; return x-Math.floor(x); }
   function applyStyle(k){
-    var st = styles[k];
-    who.textContent = st.name;
-    script.style.color = st.color;
-    script.style.fontSize = st.size + 'px';
-    script.style.fontWeight = st.w;
-    script.style.letterSpacing = st.ls;
-    letters.forEach(function(l, i){
-      var r1 = rnd(i * 7.13 + k * 31.7) - .5, r2 = rnd(i * 3.71 + k * 17.3) - .5;
-      l.style.transform = 'translateY(' + (r2 * st.dy * 2).toFixed(2) + 'px) rotate(' + (r1 * st.rot * 2).toFixed(2) + 'deg) skewX(' + st.skew + 'deg) scaleX(' + st.sx + ')';
+    var st = styles[k]; who.textContent = st.name;
+    script.style.color = st.c; script.style.fontSize = st.sz+'px'; script.style.fontWeight = st.w;
+    letters.forEach(function(l,i){
+      var r1=rnd(i*7.13+k*31.7)-.5, r2=rnd(i*3.71+k*17.3)-.5;
+      l.style.transform = 'translateY('+(r2*st.dy*2).toFixed(2)+'px) rotate('+(r1*st.rot*2).toFixed(2)+'deg) skewX('+st.sk+'deg) scaleX('+st.sx+')';
     });
-    document.querySelectorAll('.styles button').forEach(function(b){ b.setAttribute('aria-pressed', String(+b.dataset.style === k)); });
+    document.querySelectorAll('.styles button').forEach(function(b){ b.setAttribute('aria-pressed', String(+b.dataset.style===k)); });
   }
-  document.querySelectorAll('.styles button').forEach(function(b){
-    b.addEventListener('click', function(){ applyStyle(+b.dataset.style); });
-  });
+  document.querySelectorAll('.styles button').forEach(function(b){ b.addEventListener('click', function(){ applyStyle(+b.dataset.style); }); });
   applyStyle(0);
 
-  // Ылдыйкы байланыш тилкеси видеодон өткөндө чыгат
-  var dock = document.getElementById('dock');
-  function dockUpd(){ dock.classList.toggle('show', window.scrollY > 500); }
-  window.addEventListener('scroll', dockUpd, {passive:true}); dockUpd();
-  // Видео: кыймылды азайткан колдонуучуга автоматтык ойнобойт
-  var promo = document.getElementById('promo');
-  if (reduce) { promo.removeAttribute('autoplay'); promo.pause(); promo.controls = true; }
-  else { var pr = promo.play(); if (pr && pr.catch) pr.catch(function(){ promo.controls = true; }); }
-
-  // Барактарды чоңойтуп көрүү
-  var dlg = document.getElementById('viewer');
-  var dimg = document.getElementById('viewer-img');
-  document.querySelectorAll('#pages button').forEach(function(b){
-    b.addEventListener('click', function(){
-      dimg.src = b.dataset.src; dimg.alt = b.querySelector('span').textContent;
-      if (dlg.showModal) dlg.showModal();
-    });
+  /* ---------- Форма валидациясы ---------- */
+  var form = document.getElementById('cform');
+  function setErr(rowId, msg){
+    var row = document.getElementById(rowId);
+    row.classList.toggle('invalid', !!msg);
+    row.querySelector('.err').textContent = msg || '';
+  }
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = form.name.value.trim(), contact = form.contact.value.trim(), topic = form.topic.value.trim();
+    var ok = true;
+    if (name.length < 2) { setErr('row-name','Атыңызды жазыңыз (2+ тамга)'); ok=false; } else setErr('row-name','');
+    var contactOk = /^(\+?\d[\d\s]{8,14}|@[\w.]{3,})$/.test(contact);
+    if (!contactOk) { setErr('row-contact','Телефон (+996...) же @колдонуучу жазыңыз'); ok=false; } else setErr('row-contact','');
+    if (topic.length < 3) { setErr('row-topic','Предмет жана теманы жазыңыз'); ok=false; } else setErr('row-topic','');
+    if (!ok) return;
+    form.classList.add('sent');
   });
-  document.getElementById('viewer-close').addEventListener('click', function(){ dlg.close(); });
-  dlg.addEventListener('click', function(e){ if (e.target === dlg) dlg.close(); });
+
+  /* ---------- Back-to-top ---------- */
+  var totop = document.getElementById('totop');
+  function onScrollTop(){ totop.classList.toggle('show', window.scrollY > 700); }
+  window.addEventListener('scroll', onScrollTop, {passive:true}); onScrollTop();
+  totop.addEventListener('click', function(){ window.scrollTo({top:0, behavior: reduce?'auto':'smooth'}); });
 })();
 </script>
-
-</body></html>
+<!-- Firebase Analytics: сайтка канча адам киргенин көрсөтөт -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+  const firebaseConfig = {
+    apiKey: "AIzaSyC_jxGPlKfr48rbCu1L6xmbPLu95toyCBY",
+    authDomain: "khodthebekov.firebaseapp.com",
+    projectId: "khodthebekov",
+    storageBucket: "khodthebekov.firebasestorage.app",
+    messagingSenderId: "43840627138",
+    appId: "1:43840627138:web:05e2e4f05c71fcfb76b65b",
+    measurementId: "G-B53HJCZXCZ"
+  };
+  try {
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    document.querySelectorAll('a[href*="wa.me"], a[href*="t.me"]').forEach(a => {
+      a.addEventListener('click', () => logEvent(analytics, 'contact_click', { channel: a.href.includes('wa.me') ? 'whatsapp' : 'telegram' }));
+    });
+    const f = document.getElementById('cform');
+    if (f) f.addEventListener('submit', () => logEvent(analytics, 'form_submit'));
+  } catch (e) { console.log('Analytics:', e); }
+</script>
+</body>
+</html>
